@@ -2,11 +2,17 @@ package com.example.login;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -22,20 +28,21 @@ public class HelloController {
     private PasswordField passwordPasswordField;
 
 
-    public void loginButtonOnAction(ActionEvent e){
-        if (!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank()){
-            validatelogin();
-        }else {
+    @FXML
+    public void loginButtonOnAction(ActionEvent event){
+        if (usernameTextField.getText().isBlank() && passwordPasswordField.getText().isBlank()){
             loginMessageLabel.setText("Please enter username and password");
+        }else {
+            validatelogin(event);
         }
     }
 
-    public void cancelButtonOnAction(ActionEvent e){
+    public void cancelButtonOnAction(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
-    public void validatelogin(){
+    public void validatelogin(ActionEvent event){
         connection connectNow= new connection();
         Connection connectDb = connectNow.getConnection();
 
@@ -48,6 +55,9 @@ public class HelloController {
             while (queryResult.next()){
                 if (queryResult.getInt(1) == 1 ){
                     loginMessageLabel.setText("Welcome");
+
+                    changerFenetre(event);
+
                 }else {
                     loginMessageLabel.setText("Utilisateur inconnu");
                 }
@@ -58,5 +68,27 @@ public class HelloController {
 
 
     }
+
+
+    private void changerFenetre(ActionEvent event) throws IOException {
+        try {
+
+             Parent caisse = FXMLLoader.load(HelloApplication.class.getResource("dashboard.fxml"));
+
+                // Créez une nouvelle instance de Stage
+                Stage   stage = new Stage();
+                Scene  scene = new Scene(caisse);
+                stage.setScene(scene);
+                stage.show();
+
+                // Ferme l'ancienne fenêtre
+                Stage ancienneStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                ancienneStage.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

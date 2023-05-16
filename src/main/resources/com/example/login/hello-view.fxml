@@ -36,7 +36,7 @@
             <Label layoutX="43.0" layoutY="128.0" text="Username" />
             <Label layoutX="45.0" layoutY="182.0" text="Password" />
             <TextField fx:id="usernameTextField" layoutX="113.0" layoutY="124.0" prefHeight="26.0" prefWidth="141.0" promptText="Username" />
-            <Button fx:id="loginButton" layoutX="43.0" layoutY="257.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="214.0" style="-fx-background-color: #FF8557;" text="Connecter" textFill="WHITE" />
+            <Button layoutX="43.0" layoutY="257.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="214.0" style="-fx-background-color: #FF8557;" text="Connecter" textFill="WHITE" />
             <Button fx:id="cancelButton" layoutX="44.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="30.0" prefWidth="215.0" style="-fx-background-color: #FF8557;" text="Annuler" textFill="WHITE" />
             <PasswordField fx:id="passwordPasswordField" layoutX="113.0" layoutY="169.0" prefHeight="26.0" prefWidth="142.0" promptText="Password" />
             <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="43.0" layoutY="82.0" prefHeight="18.0" prefWidth="209.0" />
