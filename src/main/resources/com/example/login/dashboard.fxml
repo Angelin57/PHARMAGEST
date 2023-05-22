@@ -1,20 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.ControleDash">
+   <children>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;"
-            xmlns="http://javafx.com/javafx/19">
-   <Label layoutX="249.0" layoutY="28.0" text="Dahsboard" textFill="WHITE">
-      <font>
-         <Font name="System Bold" size="20.0"/>
-      </font>
-   </Label>
-   <Label layoutX="52.0" layoutY="81.0" text="Bienvenu sur pharmagest" textFill="#62ffb3">
-      <font>
-         <Font size="16.0"/>
-      </font>
-   </Label>
+      <AnchorPane prefHeight="700.0" prefWidth="215.0" style="-fx-background-color: #00C8A7;">
+         <children>
+            <ImageView fx:id="croix_dashboard" fitHeight="100.0" fitWidth="140.0" layoutX="58.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../../image/sodapdf-converted.jpg" />
+            </ImageView>
+            <Button layoutX="-1.0" layoutY="125.0" mnemonicParsing="false" onAction="#clickvente" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓥𝓮𝓷𝓽𝓮" textFill="WHITE" />
+            <Button layoutX="-1.0" layoutY="198.0" mnemonicParsing="false" onAction="#clickcaisse" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓪𝓲𝓼𝓼𝓮" textFill="WHITE" />
+            <Button layoutX="-1.0" layoutY="277.0" mnemonicParsing="false" onAction="#clickcommande" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
+            <Button layoutX="-2.0" layoutY="355.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓡𝓮𝓬𝓮𝓹𝓽𝓲𝓸𝓷 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
+            <Button layoutY="444.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓜𝓸𝓭𝓲𝓯𝓪𝓬𝓪𝓽𝓲𝓸𝓷 𝓹𝓻𝓸𝓯𝓲𝓵" textFill="WHITE" />
+            <Button layoutX="-2.0" layoutY="531.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓜𝓪𝓲𝓷𝓽𝓮𝓷𝓪𝓷𝓬𝓮" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="DASH" layoutX="215.0" prefHeight="700.0" prefWidth="890.0" style="-fx-background-color: #00000;">
+         <children>
+            <Label layoutX="390.0" layoutY="25.0" text="𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃" textFill="#6dc363">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="314.0" layoutY="60.0" text="𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 𝒫𝒽𝒶𝓇𝓂𝒶𝑔𝑒𝓈𝓉">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="medicament" fitHeight="604.0" fitWidth="884.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/amenagement-pharmacie.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="VENTE" layoutX="215.0" prefHeight="700.0" prefWidth="884.0" style="-fx-background-color: #00000;" visible="false">
+         <children>
+            <Label layoutX="413.0" layoutY="25.0" text="𝐕𝐄𝐍𝐓𝐄">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="280.0" layoutY="93.0" text="Bienvenue dans le menu vente">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="CAISSE" layoutX="215.0" layoutY="-3.0" prefHeight="702.0" prefWidth="884.0" visible="false">
+         <children>
+            <Label layoutX="404.0" layoutY="24.0" prefHeight="27.0" prefWidth="75.0" text="𝐂𝐀𝐈𝐒𝐒𝐄">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="278.0" layoutY="111.0" text="Bienvenue dans le menu caisse">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="COMMANDE" layoutX="215.0" prefHeight="702.0" prefWidth="890.0" visible="false">
+         <children>
+            <Label layoutX="431.0" layoutY="24.0" text="𝐂𝐎𝐌𝐌𝐀𝐍𝐃𝐄">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="339.0" layoutY="111.0" text="Bienvenue dans le menu commande">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
