@@ -33,7 +33,25 @@ public class ControleDash implements Initializable {
 
     @FXML
     private AnchorPane COMMANDE;
+    //logo menu//
+    @FXML
+    private ImageView logo_caisse;
 
+    @FXML
+    private ImageView logo_commande;
+
+    @FXML
+    private ImageView logo_maintenance;
+
+    @FXML
+    private ImageView logo_modif;
+
+    @FXML
+    private ImageView logo_recep;
+
+    @FXML
+    private ImageView logo_vente;
+    //logo menu//
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File img = new File("src/main/image/sodapdf-converted.jpg");
@@ -43,6 +61,33 @@ public class ControleDash implements Initializable {
         File med1 = new File("src/main/image/amenagement-pharmacie.jpg");
         Image med2 = new Image(med1.toURI().toString());
         medicament.setImage(med2);
+
+        //initialisation logo menu//
+        File log_vente = new File("src/main/image/logo_vente.png");
+        Image log_vente1 = new Image(log_vente.toURI().toString());
+        logo_vente.setImage(log_vente1);
+
+        File log_caisse = new File("src/main/image/logo_caisse.png");
+        Image log_caisse1 = new Image(log_caisse.toURI().toString());
+        logo_caisse.setImage(log_caisse1);
+
+        File log_commande = new File("src/main/image/logo_commande.png");
+        Image log_commande1 = new Image(log_commande.toURI().toString());
+        logo_commande.setImage(log_commande1);
+
+        File log_recep = new File("src/main/image/logo_recep_com.png");
+        Image log_recep1 = new Image(log_recep.toURI().toString());
+        logo_recep.setImage(log_recep1);
+
+        File log_modif = new File("src/main/image/logo_mod_profil.png");
+        Image log_modif1 = new Image(log_modif.toURI().toString());
+        logo_modif.setImage(log_modif1);
+
+        File log_maintenance = new File("src/main/image/logo _maintenance.png");
+        Image log_maintenance1 = new Image(log_maintenance.toURI().toString());
+        logo_maintenance.setImage(log_maintenance1);
+        //initialisation logo menu//
+
     }
 
 

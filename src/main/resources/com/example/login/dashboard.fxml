@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.ControleDash">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="file:src/main/css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.ControleDash">
    <children>
 
       <AnchorPane prefHeight="700.0" prefWidth="215.0" style="-fx-background-color: #00C8A7;">
@@ -15,12 +15,42 @@
             <ImageView fx:id="croix_dashboard" fitHeight="100.0" fitWidth="140.0" layoutX="58.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../../../../image/sodapdf-converted.jpg" />
             </ImageView>
-            <Button layoutX="-1.0" layoutY="125.0" mnemonicParsing="false" onAction="#clickvente" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓥𝓮𝓷𝓽𝓮" textFill="WHITE" />
-            <Button layoutX="-1.0" layoutY="198.0" mnemonicParsing="false" onAction="#clickcaisse" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓪𝓲𝓼𝓼𝓮" textFill="WHITE" />
-            <Button layoutX="-1.0" layoutY="277.0" mnemonicParsing="false" onAction="#clickcommande" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
-            <Button layoutX="-2.0" layoutY="355.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓡𝓮𝓬𝓮𝓹𝓽𝓲𝓸𝓷 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
-            <Button layoutY="444.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓜𝓸𝓭𝓲𝓯𝓪𝓬𝓪𝓽𝓲𝓸𝓷 𝓹𝓻𝓸𝓯𝓲𝓵" textFill="WHITE" />
-            <Button layoutX="-2.0" layoutY="531.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="215.0" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓜𝓪𝓲𝓷𝓽𝓮𝓷𝓪𝓷𝓬𝓮" textFill="WHITE" />
+            <Button fx:id="vente" layoutX="-1.0" layoutY="125.0" mnemonicParsing="false" onAction="#clickvente" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓥𝓮𝓷𝓽𝓮" textFill="WHITE" />
+            <Button fx:id="caisse" layoutX="-1.0" layoutY="198.0" mnemonicParsing="false" onAction="#clickcaisse" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓪𝓲𝓼𝓼𝓮" textFill="WHITE" />
+            <Button fx:id="commande" layoutX="-1.0" layoutY="277.0" mnemonicParsing="false" onAction="#clickcommande" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="𝓒𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
+            <Button fx:id="recep_commande" layoutX="-2.0" layoutY="355.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="                𝓡𝓮𝓬𝓮𝓹𝓽𝓲𝓸𝓷 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓮" textFill="WHITE" />
+            <Button fx:id="mod_profil" layoutY="444.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="               𝓜𝓸𝓭𝓲𝓯𝓪𝓬𝓪𝓽𝓲𝓸𝓷 𝓹𝓻𝓸𝓯𝓲𝓵" textFill="WHITE" />
+            <Button fx:id="maintenance" layoutX="-2.0" layoutY="531.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="215.0" style="-fx-background-color: #50CD89;" styleClass="button" stylesheets="@../../../../css/style.css" text="   𝓜𝓪𝓲𝓷𝓽𝓮𝓷𝓪𝓷𝓬𝓮" textFill="WHITE" />
+            <ImageView fx:id="logo_vente" fitHeight="43.0" fitWidth="51.0" layoutX="6.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo_vente.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_caisse" fitHeight="37.0" fitWidth="37.0" layoutX="9.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo_caisse.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_commande" fitHeight="51.0" fitWidth="43.0" layoutX="6.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo_commande.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_recep" fitHeight="43.0" fitWidth="37.0" layoutX="9.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo_recep_com.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_maintenance" fitHeight="43.0" fitWidth="37.0" layoutX="9.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo%20_maintenance.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_modif" fitHeight="51.0" fitWidth="43.0" layoutX="6.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/logo_mod_profil.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="DASH" layoutX="215.0" prefHeight="700.0" prefWidth="890.0" style="-fx-background-color: #00000;">
