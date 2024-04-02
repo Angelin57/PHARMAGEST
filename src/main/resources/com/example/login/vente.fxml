@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.VenteController">
+   <children>
+      <Pane prefHeight="313.0" prefWidth="292.0">
+         <children>
+            <ListView fx:id="listeMedicament" layoutX="53.0" layoutY="69.0" prefHeight="200.0" prefWidth="212.0" />
+            <TextField fx:id="txtSearchMedicament" layoutX="53.0" layoutY="37.0" />
+            <Label layoutX="72.0" layoutY="2.0" text="Médicaments">
+               <font>
+                  <Font name="Roboto Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="searchMedicamentButton" layoutX="210.0" layoutY="37.0" mnemonicParsing="false" onAction="#searchMedicamentButtonOnAction" prefHeight="23.0" prefWidth="39.0" style="-fx-background-color: afe4a7;" text="🔍">
+               <font>
+                  <Font name="Roboto Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="303.0" layoutY="4.0" prefHeight="315.0" prefWidth="343.0">
+         <children>
+            <Button fx:id="addButton" layoutX="17.0" layoutY="253.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: afe4a7;" text="Ajouter">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelButton" layoutX="200.0" layoutY="253.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="34.0" prefWidth="116.0" style="-fx-background-color: afe4a7;" text="Annuler" textFill="#121212">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="7.0" layoutY="50.0" text="Nom_médicament :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNameMedicament" layoutX="149.0" layoutY="48.0" />
+            <Label layoutX="11.0" layoutY="98.0" text="Famille :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="141.0" text="Prix unitaire : ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="180.0" text="Quantité acheté : ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtFamillyMedicament" layoutX="149.0" layoutY="96.0" />
+            <TextField fx:id="txtPriceMedicament" layoutX="149.0" layoutY="139.0" />
+            <TextField fx:id="txtQuantiteMedicament" layoutX="149.0" layoutY="178.0" />
+         </children>
+      </Pane>
+      <Pane layoutY="320.0" prefHeight="279.0" prefWidth="627.0">
+         <children>
+            <TableView fx:id="tableauAchatMedicament" layoutX="27.0" layoutY="-20.0" prefHeight="285.0" prefWidth="628.0">
+              <columns>
+                <TableColumn fx:id="codeColumn" prefWidth="150.0" text="Code_Médicament" />
+                <TableColumn fx:id="nomMedColumn" prefWidth="125.0" text="Nom_médicament" />
+                  <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix_Unit" />
+                  <TableColumn fx:id="qttColumn" prefWidth="130.22216796875" text="Quantité_achetée" />
+                  <TableColumn fx:id="Column" prefWidth="149.77780151367188" text="Prix_Total" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Accordion />
+      <Pane layoutX="664.0" layoutY="2.0" prefHeight="311.0" prefWidth="280.0">
+         <children>
+            <Label layoutX="25.0" layoutY="99.0" text="Client :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="146.0" text="Médecin : ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNameClient" layoutX="116.0" layoutY="97.0" />
+            <TextField fx:id="txtNameDoctor" layoutX="116.0" layoutY="143.0" />
+            <ToggleButton fx:id="withoutPrescriptionButton" layoutX="15.0" layoutY="37.0" mnemonicParsing="false" onAction="#withoutPrescriptionButtonOnAction" style="-fx-background-color: afe4a7;" text="Avec Ordonnance" textFill="#3c3939" />
+            <ToggleButton fx:id="withPrescriptionButton" layoutX="153.0" layoutY="37.0" mnemonicParsing="false" onAction="#withPrescriptionButtonOnAction" style="-fx-background-color: afe4a7;" text="Sans Ordonnance" />
+         </children>
+      </Pane>
+      <Button fx:id="sendButton" layoutX="694.0" layoutY="444.0" mnemonicParsing="false" onAction="#sendButtonOnAction" prefHeight="30.0" prefWidth="241.0" style="-fx-background-color: afe4a7;" text="Envoyer à la caisse">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

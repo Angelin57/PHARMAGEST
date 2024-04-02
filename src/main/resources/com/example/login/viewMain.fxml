@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.MainController">
+   <left>
+      <AnchorPane maxHeight="700.0" maxWidth="1400.0" prefHeight="700.0" prefWidth="250.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutY="-3.0" prefHeight="620.0" prefWidth="248.0" styleClass="sidebar" stylesheets="@css/stylesheet.css">
+               <children>
+                  <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="82.0" mnemonicParsing="false" onAction="#dashboardOnAction" prefHeight="26.0" prefWidth="242.0" text="Dashboard" />
+                  <Button fx:id="medicamentBtn" layoutX="3.0" layoutY="268.0" mnemonicParsing="false" onAction="#medicamentOnAction" prefHeight="26.0" prefWidth="244.0" text="Medicament" />
+                  <Button fx:id="caisseBtn" layoutY="204.0" mnemonicParsing="false" onAction="#caisseOnAction" prefHeight="26.0" prefWidth="246.0" text="Caisse" />
+                  <Button fx:id="venteBtn" layoutX="1.0" layoutY="138.0" mnemonicParsing="false" onAction="#venteOnAction" prefHeight="26.0" prefWidth="244.0" text="Vente" />
+                  <Button fx:id="fournisseurBtn" layoutX="2.0" layoutY="324.0" mnemonicParsing="false" onAction="#fournisseurOnAction" prefHeight="26.0" prefWidth="243.0" text="Fournisseur" />
+                  <Button fx:id="familleBtn" layoutX="1.0" layoutY="381.0" mnemonicParsing="false" onAction="#familleOnAction" prefHeight="26.0" prefWidth="246.0" text="Famille" />
+                  <Button fx:id="profileBtn" layoutX="1.0" layoutY="443.0" mnemonicParsing="false" onAction="#profileOnAction" prefHeight="26.0" prefWidth="246.0" text="Profile" />
+                  <Button fx:id="approvisionnementBtn" layoutY="494.0" mnemonicParsing="false" onAction="#approvisionnementOnAction" prefHeight="26.0" prefWidth="246.0" text="Approvisionnement" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <Pane prefHeight="83.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="41.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="107.0" layoutY="36.0" prefHeight="28.0" prefWidth="114.0" text="PharmaGest" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="21.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="38.0" fitWidth="46.0" layoutX="285.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/date.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="56.0" layoutX="471.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/heure.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="25.0" layoutX="690.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_bell_24px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="718.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_help_32px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="24.0" layoutX="744.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_settings_26px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="56.0" layoutX="992.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deconnexion" fitHeight="59.0" fitWidth="64.0" layoutX="1208.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Logout.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="dateLabel" layoutX="328.0" layoutY="38.0" prefHeight="27.0" prefWidth="130.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="heureLabel" layoutX="521.0" layoutY="36.0" prefHeight="23.0" prefWidth="119.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="dashboardMessageLabel" layoutX="1046.0" layoutY="41.0" prefHeight="28.0" prefWidth="121.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+
+</BorderPane>

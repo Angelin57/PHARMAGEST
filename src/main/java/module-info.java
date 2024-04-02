@@ -5,6 +5,10 @@ module com.example.login {
     requires org.postgresql.jdbc;
 
 
+
     opens com.example.login to javafx.fxml;
     exports com.example.login;
+    exports com.example.login.model;
+    exports com.example.login.controller;
+    opens com.example.login.controller to javafx.fxml;
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPane" prefHeight="599.0" prefWidth="953.0" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.FournisseurController">
+   <children>
+      <Label alignment="CENTER" layoutX="41.0" layoutY="14.0" text="Ajout fournisseur" textFill="#2262c6">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="41.0" layoutY="64.0" text="QUICK ACCESS" textFill="#545352">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="medCrud" layoutX="28.0" layoutY="230.0" prefHeight="334.0" prefWidth="901.0">
+         <children>
+            <VBox layoutX="14.0" layoutY="-104.0" prefHeight="184.0" prefWidth="170.0">
+               <children>
+                  <AnchorPane prefHeight="368.0" prefWidth="882.0" />
+                  <Label text="Nom" />
+                  <TextField fx:id="newName" promptText="Nom" />
+                  <Label text="Telephone" />
+                  <TextField fx:id="newTel" promptText="Tel" />
+                  <Label text="Email" />
+                  <TextField fx:id="newEmail" promptText="Email" />
+               </children>
+            </VBox>
+            <Button fx:id="addBtn" layoutX="128.0" layoutY="88.0" mnemonicParsing="false" onAction="#addFournisseur" style="-fx-background-color: afe4a7;" text="Ajouter" />
+            <TableView fx:id="fournisseurTable" layoutX="240.0" layoutY="-50.0" prefHeight="362.0" prefWidth="654.0">
+               <columns>
+                  <TableColumn fx:id="idColumn" prefWidth="136.79998779296875" text="id" />
+                  <TableColumn fx:id="nomColumn" prefWidth="148.79998779296875" text="nom" />
+                  <TableColumn fx:id="telColumn" prefWidth="164.800048828125" text="telephone" />
+                  <TableColumn fx:id="emailColumn" prefWidth="214.40008544921875" text="email" />
+               </columns>
+            </TableView>
+            <Label layoutX="242.0" layoutY="-111.0" text="Fournisseur ID" />
+            <TextField fx:id="IdText" layoutX="329.0" layoutY="-116.0" prefHeight="26.0" prefWidth="67.0" promptText="ID" />
+            <Button fx:id="searchBtn" layoutX="242.0" layoutY="-82.0" mnemonicParsing="false" onAction="#searchFournisseur" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: afe4a7;" text="Rechercher" />
+            <Button fx:id="updateBtn" layoutX="423.0" layoutY="-82.0" mnemonicParsing="false" onAction="#updateFournisseur" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: afe4a7;" text="Mise a jour" />
+            <Button fx:id="deleteBtn" layoutX="602.0" layoutY="-82.0" mnemonicParsing="false" onAction="#deleteFournisseur" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: afe4a7;" text="Supprimer" />
+            <TextArea fx:id="resultArea" layoutX="14.0" layoutY="153.0" prefHeight="142.0" prefWidth="198.0" />
+            <Button fx:id="allFourBtn" layoutX="752.0" layoutY="-82.0" mnemonicParsing="false" onAction="#getAllFournisseurs" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: afe4a7;" text="Tous les fournisseurs" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="nomText" layoutX="457.0" layoutY="114.0" prefHeight="26.0" prefWidth="101.0" promptText="Nom" />
+      <TextField fx:id="emailText" layoutX="713.0" layoutY="114.0" prefHeight="26.0" prefWidth="122.0" promptText="Email" />
+      <TextField fx:id="telText" layoutX="577.0" layoutY="114.0" prefHeight="26.0" prefWidth="116.0" promptText="Tel" />
+   </children>
+</AnchorPane>

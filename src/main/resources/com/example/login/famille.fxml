@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1000.0" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.FamilleController">
+   <children>
+      <Label alignment="CENTER" layoutX="41.0" layoutY="14.0" text="Ajout Famille" textFill="#2262c6">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="medCrud" layoutX="22.0" layoutY="114.0" prefHeight="483.0" prefWidth="902.0">
+         <children>
+            <VBox layoutX="26.0" layoutY="16.0" prefHeight="305.0" prefWidth="170.0">
+               <children>
+                  <AnchorPane prefHeight="425.0" prefWidth="174.0">
+                     <children>
+                        <TextField fx:id="newNom" layoutX="14.0" layoutY="92.0" prefHeight="26.0" prefWidth="170.0" promptText="Nom" />
+                        <Button fx:id="addFamilleButton" layoutX="115.0" layoutY="140.0" mnemonicParsing="false" onAction="#addFamilleButtonOnAction" style="-fx-background-color: afe4a7;" text="Ajouter" />
+                        <Label layoutX="19.0" layoutY="57.0" text="Nom" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <TableView fx:id="medicamentTable" layoutX="242.0" layoutY="70.0" prefHeight="342.0" prefWidth="675.0">
+               <columns>
+                  <TableColumn fx:id="familleIdColumn" prefWidth="118.66671752929688" text="id" />
+                  <TableColumn fx:id="familleNameColumn" prefWidth="554.6667073567709" text="nom_famille" />
+               </columns>
+            </TableView>
+            <Label layoutX="254.0" layoutY="9.0" text="ID Famille :" />
+            <TextField fx:id="familleIdText" layoutX="341.0" layoutY="4.0" prefHeight="26.0" prefWidth="46.0" promptText="ID" />
+            <Button fx:id="searchFamilleButton" layoutX="254.0" layoutY="38.0" mnemonicParsing="false" onAction="#searchFamilleButtonOnActuion" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Rechercher" />
+            <Button fx:id="updateFamilleButton" layoutX="408.0" layoutY="38.0" mnemonicParsing="false" onAction="#updateFamilleButtonOnAction" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Mise a jour" />
+            <Button fx:id="deleteFamilleButton" layoutX="561.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteFamilleButtonOnAction" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Supprimer" />
+            <TextArea fx:id="resultArea" layoutX="32.0" layoutY="356.0" prefHeight="50.0" prefWidth="170.0" />
+            <Button fx:id="viewFamilleButton" layoutX="706.0" layoutY="38.0" mnemonicParsing="false" onAction="#viewFamilleButtonOnAction" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: afe4a7;" text="Voir toutes les familles" />
+            <TextField fx:id="NomFamille" layoutX="553.0" layoutY="4.0" prefHeight="26.0" prefWidth="149.0" promptText="Nom Famille" />
+            <Label layoutX="461.0" layoutY="8.0" text="Nom_famille :" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
