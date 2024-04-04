@@ -27,20 +27,18 @@
          <children>
             <VBox layoutX="26.0" layoutY="16.0" prefHeight="305.0" prefWidth="170.0">
                <children>
-                  <AnchorPane prefHeight="425.0" prefWidth="174.0">
+                  <AnchorPane prefHeight="306.0" prefWidth="192.0">
                      <children>
                         <TextField fx:id="nameText" layoutX="2.0" layoutY="26.0" prefHeight="26.0" prefWidth="170.0" promptText="Nom" />
                         <Label layoutX="4.0" layoutY="5.0" text="Nom" />
-                        <Label layoutX="3.0" layoutY="52.0" text="Code" />
-                        <TextField fx:id="CodeText" layoutX="2.0" layoutY="70.0" prefHeight="26.0" prefWidth="170.0" promptText="Code" />
-                        <Label layoutX="4.0" layoutY="201.0" text="famille" />
-                        <Label layoutX="3.0" layoutY="96.0" text="Date de fabrication" />
-                        <TextField fx:id="dateFabText" layoutX="2.0" layoutY="118.0" prefHeight="26.0" prefWidth="170.0" promptText="dd/mm/yyyy" />
-                        <Label layoutX="3.0" layoutY="151.0" text="Date de peremption" />
-                        <TextField fx:id="datePerText" layoutX="1.0" layoutY="175.0" prefHeight="26.0" prefWidth="170.0" promptText="dd/mm/yyyy" />
-                        <ChoiceBox fx:id="familleText" layoutX="3.0" layoutY="220.0" prefWidth="150.0" />
+                        <Label layoutX="4.0" layoutY="134.0" prefHeight="18.0" prefWidth="170.0" text="Famille               " />
+                        <Label layoutX="3.0" layoutY="69.0" text="Quantité" />
+                        <TextField fx:id="quantiteText" layoutX="2.0" layoutY="92.0" prefHeight="26.0" prefWidth="170.0" promptText="Quantité" />
+                        <ChoiceBox fx:id="familleText" layoutX="3.0" layoutY="157.0" prefHeight="26.0" prefWidth="104.0" />
                         <Label layoutX="4.0" layoutY="252.0" prefHeight="18.0" prefWidth="150.0" text="Prix unitaire       " />
                         <TextField fx:id="prixunit" layoutX="3.0" layoutY="269.0" prefHeight="26.0" prefWidth="117.0" promptText="0.00 Rs" />
+                        <ChoiceBox fx:id="FournisseurText" layoutX="3.0" layoutY="216.0" prefHeight="26.0" prefWidth="104.0" />
+                        <Label layoutX="2.0" layoutY="197.0" prefHeight="18.0" prefWidth="170.0" text="Fournisseur" />
                      </children>
                   </AnchorPane>
                </children>
@@ -50,11 +48,10 @@
                <columns>
                   <TableColumn fx:id="medIdColumn" prefWidth="92.79998779296875" text="id" />
                   <TableColumn fx:id="medNameColumn" prefWidth="88.800048828125" text="nom" />
-                  <TableColumn fx:id="medCodeColumn" prefWidth="74.39996337890625" text="code" />
-                  <TableColumn fx:id="medDatefabColumn" minWidth="0.0" prefWidth="97.60003662109375" text="date de fab" />
-                  <TableColumn fx:id="medDateperColumn" prefWidth="112.79998779296875" text="date de per" />
-                  <TableColumn fx:id="medFamilleColumn" minWidth="0.0" prefWidth="97.60003662109375" text="famille" />
-                  <TableColumn fx:id="medPrixunitColumn" minWidth="0.0" prefWidth="112.0" text="prix unitaire" />
+                  <TableColumn fx:id="medQuantiteColumn" minWidth="0.0" prefWidth="97.60003662109375" text="quantité" />
+                  <TableColumn fx:id="medFournisseurColumn" prefWidth="112.79998779296875" text="fournisseur" />
+                  <TableColumn fx:id="medFamilleColumn" minWidth="0.0" prefWidth="119.20001220703125" text="famille" />
+                  <TableColumn fx:id="medPrixunitColumn" minWidth="0.0" prefWidth="162.4000244140625" text="prix unitaire" />
                </columns>
             </TableView>
             <Label layoutX="254.0" layoutY="9.0" text="Medicament ID" />
@@ -62,13 +59,11 @@
             <Button fx:id="searchMedtn" layoutX="254.0" layoutY="38.0" mnemonicParsing="false" onAction="#searchMedicament" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Rechercher" />
             <Button fx:id="updateMedBtn" layoutX="408.0" layoutY="38.0" mnemonicParsing="false" onAction="#updatePrix" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Mise a jour" />
             <Button fx:id="deleteMedBtn" layoutX="561.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteMedicament" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: afe4a7;" text="Supprimer" />
-            <TextArea fx:id="resultArea" layoutX="26.0" layoutY="401.0" prefHeight="50.0" prefWidth="170.0" />
-            <Button fx:id="searchMedsBtn" layoutX="706.0" layoutY="38.0" mnemonicParsing="false" onAction="#searchMedicaments" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: afe4a7;" text="Voir tous les medicaments" />
-            <TextField fx:id="medIdText1" layoutX="472.0" layoutY="4.0" prefHeight="26.0" prefWidth="55.0" promptText="Code" />
-            <TextField fx:id="datefab" layoutX="532.0" layoutY="3.0" prefHeight="26.0" prefWidth="82.0" promptText="dd/mm/yyyy" />
-            <TextField fx:id="dateper" layoutX="621.0" layoutY="4.0" prefHeight="26.0" prefWidth="90.0" promptText="dd/mm/yyyy" />
-            <TextField fx:id="prixunit" layoutX="718.0" layoutY="4.0" prefHeight="26.0" prefWidth="82.0" promptText="Prix unitaire" />
-            <TextField fx:id="medIdText2" layoutX="395.0" layoutY="4.0" prefHeight="26.0" prefWidth="67.0" promptText="nom" />
+            <TextArea fx:id="resultArea" layoutX="26.0" layoutY="401.0" prefHeight="71.0" prefWidth="170.0" />
+            <Button fx:id="viewAllMedicament" layoutX="706.0" layoutY="38.0" mnemonicParsing="false" onAction="#viewAllMedicament" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: afe4a7;" text="Voir tous les medicaments" />
+            <TextField fx:id="newQuantite" layoutX="583.0" layoutY="3.0" prefHeight="26.0" prefWidth="82.0" promptText="Quantité" />
+            <TextField fx:id="newPrixunit" layoutX="712.0" layoutY="4.0" prefHeight="26.0" prefWidth="82.0" promptText="Prix unitaire" />
+            <TextField fx:id="newNom" layoutX="444.0" layoutY="4.0" prefHeight="26.0" prefWidth="82.0" promptText="nom" />
          </children>
       </AnchorPane>
    </children>

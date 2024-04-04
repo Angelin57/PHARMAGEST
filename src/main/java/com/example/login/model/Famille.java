@@ -28,4 +28,9 @@ public class Famille {
         this.idFamille = idFamille;
         this.Nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return Nom;
+    }
 }

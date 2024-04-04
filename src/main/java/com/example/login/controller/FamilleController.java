@@ -4,6 +4,8 @@ import com.example.login.model.Famille;
 import com.example.login.model.FamilleDAO;
 import com.example.login.model.Fournisseur;
 import com.example.login.model.FournisseurDAO;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,34 +62,25 @@ public class FamilleController {
     private TableView<Famille> medicamentTable;
 
     @FXML
-    private void initialize(){
-        familleIdColumn.setCellValueFactory(new PropertyValueFactory<>("idFamille"));
-        familleNameColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+    private void initialize() {
+        familleIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdFamille()).asObject());
+        familleNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
 
-
-        // Ajouter un événement de sélection au TableView
         medicamentTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // Récupérer les données du fournisseur sélectionné
                 int idFamille = newValue.getIdFamille();
                 String nom = newValue.getNom();
 
-
-                System.out.print(nom);
-                // Afficher les données dans les champs de texte
                 familleIdText.setText(String.valueOf(idFamille));
                 NomFamille.setText(nom);
-
             }
         });
+
         try {
             viewFamilleButtonOnAction(null);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             showErrorMessage("Erreur lors de la récupération des familles au démarrage : " + e.getMessage());
         }
-
-
-
     }
     @FXML
     void addFamilleButtonOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -151,19 +144,19 @@ public class FamilleController {
         try {
             int id = Integer.parseInt(familleIdText.getText());
 
-            FournisseurDAO.deleteFournisseur(id);
+            FamilleDAO.deleteFamille(id);
             // Rafraîchir le TableView après la suppression
             refreshTableView();
-            resultArea.setText("Fournisseur supprimé avec succès !");
+            resultArea.setText("Famille supprimé avec succès !");
             familleIdText.clear();
             NomFamille.clear();
 
         } catch (SQLException e) {
-            showErrorMessage("Erreur lors de la suppression du fournisseur : " + e.getMessage());
-            resultArea.setText("Erreur lors de la suppression du fournisseur : " + e.getMessage());
+            showErrorMessage("Erreur lors de la suppression du Famille : " + e.getMessage());
+            resultArea.setText("Erreur lors de la suppression du Famille : " + e.getMessage());
         } catch (NumberFormatException e) {
-            showErrorMessage("Veuillez saisir une valeur numérique valide pour l'ID du fournisseur.");
-            resultArea.setText("Veuillez saisir une valeur numérique valide pour l'ID du fournisseur.");
+            showErrorMessage("Veuillez saisir une valeur numérique valide pour l'ID du Famille.");
+            resultArea.setText("Veuillez saisir une valeur numérique valide pour l'ID du Famille.");
         } catch (ClassNotFoundException e) {
             showErrorMessage("Classe non trouvée : " + e.getMessage());
             resultArea.setText("Classe non trouvée : " + e.getMessage());

@@ -5,99 +5,81 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.StringProperty;
 
 public class Medicament {
-    private IntegerProperty id_medicament;
-    private StringProperty nom;
-    private StringProperty forme;
-    private StringProperty famille;
-    private IntegerProperty prix;
-    private IntegerProperty quantite;
-
-    //quantite//
-
-    public int getQuantite() {
-        return quantite.get();
+    public Medicament(Integer id_medicament) {
+        this.id_medicament = id_medicament;
     }
 
-    public IntegerProperty quantiteProperty() {
-        return quantite;
+    public Medicament() {
+
     }
 
-    public void setQuantite(int quantite) {
-        this.quantite.set(quantite);
-    }
-    //quantite//
-
-    //id//
-    public int getId_medicament() {
-        return id_medicament.get();
+    public Medicament(String familleName) {
     }
 
-    public IntegerProperty medIdProperty() {
+    public Integer getId_medicament() {
         return id_medicament;
     }
 
-    public void setId_medicament(int id_medicament) {
-        this.id_medicament.set(id_medicament);
+    public void setId_medicament(Integer id_medicament) {
+        this.id_medicament = id_medicament;
     }
 
-    //nom//
-    public String getNom() {
-        return nom.get();
+    private Integer id_medicament;
+    private String nom_medicament;
+    private Integer quantite_medicament;
+    private String fournisseur_medicament;
+    private String famille_medicament;
+    private Integer prix_medicament;
+
+    public String getNom_medicament() {
+        return nom_medicament;
     }
 
-    public StringProperty medNameProperty() {
-        return nom;
+    public void setNom_medicament(String nom_medicament) {
+        this.nom_medicament = nom_medicament;
     }
 
-    public void setNom(String nom) {
-        this.nom.set(nom);
-    }
-    //forme//
-    public String getForme() {
-        return forme.get();
+    public Integer getQuantite_medicament() {
+        return quantite_medicament;
     }
 
-    public StringProperty medFormeProperty() {
-        return forme;
+    public void setQuantite_medicament(Integer quantite_medicament) {
+        this.quantite_medicament = quantite_medicament;
     }
 
-    public void setForme(String forme) {
-        this.forme.set(forme);
+    public String getFournisseur_medicament() {
+        return fournisseur_medicament;
     }
 
-    //famille//
-    public String getFamille() {
-        return famille.get();
+    public void setFournisseur_medicament(String fournisseur_medicament) {
+        this.fournisseur_medicament = fournisseur_medicament;
     }
 
-    public StringProperty medFamilleProperty() {
-        return famille;
+    public String getFamille_medicament() {
+        return famille_medicament;
     }
 
-    public void setFamille(String famille) {
-        this.famille.set(famille);
+    public void setFamille_medicament(String famille_medicament) {
+        this.famille_medicament = famille_medicament;
     }
 
-    //prix//
-    public int getPrix() {
-        return prix.get();
+    public Integer getPrix_medicament() {
+        return prix_medicament;
     }
 
-    public IntegerProperty medPrixProperty() {
-        return prix;
+    public void setPrix_medicament(Integer prix_medicament) {
+        this.prix_medicament = prix_medicament;
     }
 
-    public void setPrix(int prix) {
-        this.prix.set(prix);
+    public Medicament(String nom_medicament, Integer quantite_medicament, String fournisseur_medicament, String famille_medicament, Integer prix_medicament) {
+        this.nom_medicament = nom_medicament;
+        this.quantite_medicament = quantite_medicament;
+        this.fournisseur_medicament = fournisseur_medicament;
+        this.famille_medicament = famille_medicament;
+        this.prix_medicament = prix_medicament;
     }
+    private String nomFamille;
+    private String nomFournisseur;
 
 
-    public Medicament(IntegerProperty idMedicament, StringProperty nom, StringProperty forme, StringProperty famille, IntegerProperty prix, IntegerProperty quantite) {
-        this.id_medicament = idMedicament;
-        this.nom = nom;
-        this.forme = forme;
-        this.famille = famille;
-        this.prix = prix;
-        this.quantite= quantite;
-    }
 }
