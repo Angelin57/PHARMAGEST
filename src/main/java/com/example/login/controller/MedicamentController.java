@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class MedicamentController {
     @FXML
@@ -132,25 +133,35 @@ public class MedicamentController {
     }
 
     @FXML
-    void insertMedicament(ActionEvent event) throws SQLException, ClassNotFoundException{
-        String nom = nameText.getText();
-        String Quantite = String.valueOf(Integer.valueOf(quantiteText.getText()));
-        Integer Prix = Integer.valueOf(prixunit.getText());
-        String Famille = String.valueOf(familleText.getValue());
-        String Fournisseur = String.valueOf(FournisseurText.getValue());
+    void insertMedicament(ActionEvent event) {
+        String nameValue = nameText.getText();
+        int quantiteValue;
+        int prixUnitValue;
+        Famille familleValue;
+        Fournisseur fournisseurValue;
 
-        if (!nom.isEmpty() && Quantite != null && Prix != null && Famille !=  null && Fournisseur != null) {
+        try {
+            quantiteValue = Integer.parseInt(quantiteText.getText());
+            prixUnitValue = Integer.parseInt(prixunit.getText());
+            familleValue = familleText.getValue();
+            fournisseurValue = FournisseurText.getValue();
+        } catch (NumberFormatException e) {
+            resultArea.setText("Erreur lors de la conversion des valeurs : " + e.getMessage());
+            return;
+        }
+
+        if (!nameValue.isEmpty() && familleValue != null && fournisseurValue != null) {
             try {
-                userDAO.insertUser(nom, Quantite, String.valueOf(Prix));
-                refreshTableView(); // Méthode pour actualiser la TableView
+                MedicamentDAO.insertMedicament(nameValue, quantiteValue, prixUnitValue, familleValue, fournisseurValue);
+                refreshTableView();
                 nameText.clear();
                 quantiteText.clear();
                 prixunit.clear();
                 familleText.setValue(null);
                 FournisseurText.setValue(null);
-                resultArea.setText("Utilisateur ajouté avec succès !");
+                resultArea.setText("Médicament ajouté avec succès !");
             } catch (SQLException | ClassNotFoundException e) {
-                resultArea.setText("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+                resultArea.setText("Erreur lors de l'ajout du Médicament : " + e.getMessage());
                 e.printStackTrace();
             }
         } else {
@@ -160,17 +171,89 @@ public class MedicamentController {
 
 
     @FXML
-    void searchMedicament(ActionEvent event) {
+    void searchMedicament(ActionEvent event) throws SQLException,ClassNotFoundException{
+        try {
+            int medId = medIdText.getText().isEmpty() ? -1 : Integer.parseInt(medIdText.getText());
+            String medNom = newNom.getText().isEmpty() ? "" : newNom.getText();
+            Integer medQuantite = newQuantite.getText().isEmpty() ? -1 : Integer.parseInt(newQuantite.getText());
+            Integer medPrix = newPrixunit.getText().isEmpty() ? -1 : Integer.parseInt(newPrixunit.getText());
+
+
+            // Appelez la méthode de recherche en fonction des paramètres saisis
+            List<Medicament> medicaments = MedicamentDAO.searchMedicament(medId, medNom, medQuantite,medPrix);
+
+            if (!medicaments.isEmpty()) {
+                // Affichez les informations des utilisateurs trouvés dans les champs de texte appropriés ou dans un TextArea
+                StringBuilder resultText = new StringBuilder("Medicament trouvés : \n");
+                for (Medicament medicament : medicaments) {
+                    resultText.append("ID: ").append(medicament.getId_medicament()).append("\n");
+                    resultText.append("Nom: ").append(medicament.getNom_medicament()).append("\n");
+                    resultText.append("Quantite: ").append(medicament.getQuantite_medicament()).append("\n");
+                    resultText.append("Prix: ").append(medicament.getPrix_medicament()).append("\n\n");
+                }
+                resultArea.setText(resultText.toString());
+                // mettre à jour un TableView avec les résultats
+                medicamentTable.setItems(FXCollections.observableArrayList(medicaments));
+                medIdText.clear();
+                newNom.clear();
+                newQuantite.clear();
+                newPrixunit.clear();
+            } else {
+                // Affichez un message si aucun utilisateur n'est trouvé
+                resultArea.setText("Aucun medicament trouvé .");
+                newNom.clear();
+            }
+        } catch (NumberFormatException e) {
+            resultArea.setText("Veuillez saisir un ID medicament valide.");
+        } catch (SQLException e) {
+            // Gérez les exceptions SQL
+            resultArea.setText("Erreur lors de la recherche de l'utilisateur : " + e.getMessage());
+            throw e;
+        }
 
     }
 
     @FXML
-    void viewAllMedicament(ActionEvent event) {
+    void viewAllMedicament(ActionEvent event) throws SQLException, ClassNotFoundException {
+        try {
+            ObservableList<Medicament> users = FXCollections.observableArrayList(MedicamentDAO.getAllMedicaments());
+            medicamentTable.setItems(users);
+            resultArea.setText("");
+        } catch (SQLException e) {
+            resultArea.setText("Problème lors de la récupération des utilisateurs : " + e);
+            throw e;
+        }
+
 
     }
 
     @FXML
-    void updatePrix(ActionEvent event) {
+    void updateMed(ActionEvent event) throws SQLException, ClassNotFoundException {
+        try {
+            int id = Integer.parseInt(medIdText.getText());
+            String nom = newNom.getText();
+            int quantite = Integer.parseInt(newQuantite.getText());
+            int prix = Integer.parseInt(newPrixunit.getText());
+
+
+            MedicamentDAO.updateMedicament(id,nom, prix, quantite);
+            // Rafraîchir le TableView après la mise à jour
+            refreshTableView();
+            resultArea.setText("Medicament mis à jour avec succès !");
+            medIdText.clear();
+            newPrixunit.clear();
+            nameText.clear();
+            newQuantite.clear();
+        } catch (SQLException e) {
+            showErrorMessage("Erreur lors de la mise à jour du Medicament : " + e.getMessage());
+            resultArea.setText("Erreur lors de la mise à jour du Medicament : " + e.getMessage());
+        } catch (NumberFormatException e) {
+            showErrorMessage("Veuillez saisir une valeur numérique valide pour le Prix.");
+            resultArea.setText("Veuillez saisir une valeur numérique valide pour le Prix.");
+        } catch (ClassNotFoundException e) {
+            showErrorMessage("Classe non trouvée : " + e.getMessage());
+            resultArea.setText("Classe non trouvée : " + e.getMessage());
+        }
 
     }
     private void refreshTableView() throws SQLException, ClassNotFoundException {

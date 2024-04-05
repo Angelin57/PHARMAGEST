@@ -49,18 +49,17 @@ public class MedicamentDAO {
         return medicamentList;
     }
 
-    public static void insertMedicament(String nom,String fournisseur,String famille,Integer prix,Integer quantite) throws SQLException, ClassNotFoundException {
+    public static void insertMedicament(String nom, int prixUnit, int quantite, Famille famille, Fournisseur fournisseur) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO public.\"medicament\" (nom_medicament, fournisseur_medicament, famille_medicament, prix_medicament, quantite_medicament) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = new connection().getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setString(1, nom);
-            statement.setString(2, fournisseur);
-            statement.setString(3, famille);
-            statement.setInt(4, prix);
+            statement.setString(2, fournisseur.getNom()); // Utilise l'identifiant du fournisseur
+            statement.setString(3, famille.getNom()); // Utilise l'identifiant de la famille
+            statement.setInt(4, prixUnit);
             statement.setInt(5, quantite);
-
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
@@ -87,7 +86,7 @@ public class MedicamentDAO {
             ResultSet rs = statement.executeQuery();
             medicamentList = getMedicamentList(rs);
         } catch (SQLException e) {
-            System.out.println("Une erreur est survenue lors de la recherche de l'utilisateur : " + e);
+            System.out.println("Une erreur est survenue lors de la recherche du medicament : " + e);
             throw e;
         }
         return medicamentList;
@@ -136,6 +135,6 @@ public class MedicamentDAO {
         }
     }
 
-  
+
 
 }
