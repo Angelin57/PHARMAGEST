@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1000.0" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.MedicamentController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1140.0" style="-fx-background-color: #D3FFFE;" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.MedicamentController">
    <children>
       <Label alignment="CENTER" layoutX="41.0" layoutY="14.0" text="Ajout medicament" textFill="#2262c6">
          <font>

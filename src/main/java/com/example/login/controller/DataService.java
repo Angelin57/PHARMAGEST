@@ -29,6 +29,26 @@ public class DataService {
         }
         return fournisseurs;
     }
+    // Méthode pour récupérer les medicament depuis la base de données
+    public List<Medicament> getMedicament() {
+        List<Medicament> medicaments = new ArrayList<>();
+        String query = "SELECT * FROM medicament";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                // Récupérez les données du résultat de la requête et créez un objet Medicament pour chaque fournisseur
+                int idMed = resultSet.getInt("id_medicament");
+                String nomMed = resultSet.getString("nom_medicament");
+                Medicament medicament = new Medicament(idMed, nomMed);
+                medicaments.add(medicament);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer l'erreur appropriée selon votre application
+        }
+        return medicaments;
+    }
 
     // Méthode pour récupérer les familles depuis la base de données
     public List<Famille> getFamilles() {

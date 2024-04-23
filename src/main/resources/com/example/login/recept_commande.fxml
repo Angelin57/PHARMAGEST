@@ -6,27 +6,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1140.0" style="-fx-background-color: #D3FFFE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.ListeCommandeController">
    <children>
-      <Label layoutX="301.0" layoutY="14.0" prefHeight="47.0" prefWidth="382.0" text="RECEPTION COMMANDE">
+      <Label layoutX="301.0" layoutY="14.0" prefHeight="47.0" prefWidth="382.0" text="LISTE DES COMMANDES">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TableView layoutX="86.0" layoutY="158.0" prefHeight="295.0" prefWidth="742.0">
+      <TableView fx:id="listeTable" layoutX="48.0" layoutY="103.0" prefHeight="436.0" prefWidth="1043.0">
          <columns>
-            <TableColumn prefWidth="70.39999103546143" text="Fournisseur" />
-            <TableColumn prefWidth="87.20001220703125" text="Médicament" />
-            <TableColumn prefWidth="87.20002746582031" text="Ancien Stock" />
-            <TableColumn prefWidth="83.20001220703125" text="Qté commandé" />
-            <TableColumn prefWidth="89.5999755859375" text="Nouveau stock" />
-            <TableColumn prefWidth="106.39996337890625" text="prix unit" />
-            <TableColumn prefWidth="70.4000244140625" text="Qté livré" />
-            <TableColumn prefWidth="75.0" text="Prix tot" />
-            <TableColumn prefWidth="74.39996337890625" text="Action" />
+            <TableColumn fx:id="idApproColumn" prefWidth="70.39999103546143" text="ID" />
+            <TableColumn fx:id="medColumn" prefWidth="87.20001220703125" text="Médicament" />
+            <TableColumn fx:id="dateRecuColumn" prefWidth="87.20002746582031" text="Date de reçue" />
+            <TableColumn fx:id="fournisseurColumn" prefWidth="94.39996337890625" text="Fournisseur" />
+            <TableColumn fx:id="prixFournisseurColumn" prefWidth="94.39996337890625" text="prix fournisseur" />
+            <TableColumn fx:id="prixVenteColumn" prefWidth="124.79998779296875" text="prix de vente" />
+            <TableColumn fx:id="qttInitColumn" prefWidth="114.4000244140625" text="Quantité initial" />
+            <TableColumn fx:id="qttRecueColumn" minWidth="0.0" prefWidth="123.199951171875" text="Quantité reçue" />
+            <TableColumn fx:id="qttCommandeColumn" prefWidth="150.40008544921875" text="Quantité commandé" />
+            <TableColumn fx:id="statusColumn" minWidth="6.39990234375" prefWidth="85.60009765625" text="Status" />
          </columns>
       </TableView>
-      <Label layoutX="86.0" layoutY="109.0" prefHeight="30.0" prefWidth="235.0" text="Liste des médicaments livrés" textFill="#2262c6">
+      <Label layoutX="84.0" layoutY="61.0" prefHeight="30.0" prefWidth="274.0" text="Liste des médicaments commandé" textFill="#2262c6">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

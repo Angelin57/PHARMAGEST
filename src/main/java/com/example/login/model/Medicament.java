@@ -9,12 +9,16 @@ public class Medicament {
         this.id_medicament = id_medicament;
     }
 
+
+    public Medicament(int idMed, String nomMed) {
+        this.id_medicament = idMed;
+        this.nom_medicament = nomMed;
+    }
+
     public Medicament() {
 
     }
 
-    public Medicament(String familleName) {
-    }
 
     public Integer getId_medicament() {
         return id_medicament;
@@ -78,8 +82,9 @@ public class Medicament {
         this.famille_medicament = famille_medicament;
         this.prix_medicament = prix_medicament;
     }
-    private String nomFamille;
-    private String nomFournisseur;
-
+    @Override
+    public String toString() {
+        return nom_medicament;
+    }
 
 }

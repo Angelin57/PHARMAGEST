@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,25 +10,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.ApprovisionnementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1140.0" style="-fx-background-color: D3FFFE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.ApprovisionnementController">
    <children>
-      <Label layoutX="345.0" layoutY="14.0" prefHeight="47.0" prefWidth="338.0" text="APPROVISIONNEMENT">
+      <Label layoutX="87.0" layoutY="22.0" prefHeight="47.0" prefWidth="965.0" text="APPROVISIONNEMENT et RECEPTION DE COMMANDE">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TableView layoutX="14.0" layoutY="106.0" prefHeight="248.0" prefWidth="845.0">
+      <TableView fx:id="approTable" layoutX="43.0" layoutY="107.0" prefHeight="248.0" prefWidth="798.0">
          <columns>
-            <TableColumn fx:id="idMedColumn" prefWidth="70.39999103546143" text="ID" />
-            <TableColumn fx:id="nomColumn" prefWidth="87.20001220703125" text="Nom" />
-            <TableColumn fx:id="dateRecueColumn" prefWidth="87.20002746582031" text="date_reçue" />
-            <TableColumn fx:id="prixUnitColumn" prefWidth="83.20001220703125" text="prix unitaire" />
-            <TableColumn fx:id="prixFournisseurColumn" prefWidth="100.800048828125" text="Prix Fournisseur" />
-            <TableColumn fx:id="qttCommandeColumn" prefWidth="109.5999755859375" text="Qté Commandé" />
-            <TableColumn fx:id="qttRecueColumn" prefWidth="101.60003662109375" text=" Qté reçue" />
-            <TableColumn fx:id="seuilColumn" prefWidth="64.79998779296875" text="seuil" />
-            <TableColumn fx:id="statusColumn" prefWidth="72.800048828125" text="Status" />
-            <TableColumn fx:id="actionColumn" prefWidth="66.400146484375" text="Action" />
+            <TableColumn fx:id="idMedColumn" prefWidth="56.7999849319458" text="ID" />
+            <TableColumn fx:id="nomColumn" prefWidth="135.20001220703125" text="Nom" />
+            <TableColumn fx:id="dateRecueColumn" prefWidth="103.20005798339844" text="date_reçue" />
+            <TableColumn fx:id="prixFournisseurColumn" prefWidth="98.39996337890625" text="Prix Fournisseur" />
+            <TableColumn fx:id="qttCommandeColumn" prefWidth="137.60003662109375" text="Qté Commandé" />
+            <TableColumn fx:id="qttRecueColumn" prefWidth="84.800048828125" text=" Qté reçue" />
+            <TableColumn fx:id="statusColumn" prefWidth="96.79998779296875" text="Status" />
+            <TableColumn fx:id="fournisseurColumn" prefWidth="88.79998779296875" text="Fournisseur" />
+            <TableColumn fx:id="id_medColumn" prefWidth="88.79998779296875" text="id_med" visible="false" />
          </columns>
       </TableView>
       <Label layoutX="240.0" layoutY="72.0" prefHeight="30.0" prefWidth="170.0" text="Liste des médicaments" textFill="#2262c6">
@@ -36,7 +35,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="216.0" layoutY="366.0" prefHeight="30.0" prefWidth="258.0" text="Liste des médicaments en dessous du seuil:" textFill="#2262c6">
+      <Label layoutX="240.0" layoutY="363.0" prefHeight="30.0" prefWidth="273.0" text="Liste des médicaments en dessous du seuil 30:" textFill="#2262c6">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -47,9 +46,8 @@
          </font>
       </Label>
       <Label layoutX="881.0" layoutY="122.0" prefHeight="18.0" prefWidth="76.0" text="Médicament:" />
-      <TextField fx:id="medicamentText" layoutX="958.0" layoutY="119.0" prefHeight="26.0" prefWidth="149.0" />
       <Label layoutX="884.0" layoutY="182.0" prefHeight="18.0" prefWidth="67.0" text="Fournisseur:" />
-      <Label layoutX="884.0" layoutY="230.0" prefHeight="47.0" prefWidth="67.0" text="Prix unit:" />
+      <Label layoutX="885.0" layoutY="231.0" prefHeight="30.0" prefWidth="55.0" text="Prix " />
       <Label layoutX="881.0" layoutY="298.0" prefHeight="18.0" prefWidth="100.0" text="Qté à " />
       <Label layoutX="887.0" layoutY="360.0" prefHeight="18.0" prefWidth="55.0" text="Statut:" />
       <Label layoutX="843.0" layoutY="419.0" prefHeight="18.0" prefWidth="114.0" text="Date de livraison: " />
@@ -57,27 +55,41 @@
       <Label layoutX="842.0" layoutY="487.0" prefHeight="30.0" prefWidth="100.0" text="Qté livré(si livré):" />
       <TextField fx:id="prixunitText" layoutX="957.0" layoutY="241.0" prefHeight="26.0" prefWidth="150.0" />
       <TextField fx:id="qttcommandeText" layoutX="958.0" layoutY="302.0" prefHeight="26.0" prefWidth="150.0" />
-      <ComboBox fx:id="statusType" layoutX="957.0" layoutY="358.0" prefHeight="30.0" prefWidth="150.0" />
       <Label layoutX="881.0" layoutY="313.0" prefHeight="18.0" prefWidth="67.0" text="commandé:" />
       <DatePicker fx:id="datelivraisonType" layoutX="962.0" layoutY="419.0" prefHeight="30.0" prefWidth="150.0" />
       <TextField fx:id="qttlivreText" layoutX="959.0" layoutY="487.0" prefHeight="26.0" prefWidth="150.0" />
-      <Button fx:id="ajoutBtn" layoutX="865.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: AFE4A7;" text="Ajouter">
+      <Button fx:id="ajoutBtn" layoutX="865.0" layoutY="546.0" mnemonicParsing="false" onAction="#ajoutApproOnAction" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: AFE4A7;" text="Ajouter">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="annulerBtn" layoutX="1004.0" layoutY="546.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: AFE4A7;" text="Annuler">
+      <Button fx:id="annulerBtn" layoutX="1004.0" layoutY="546.0" mnemonicParsing="false" onAction="#AnnulerBoutonOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: AFE4A7;" text="Annuler">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ComboBox fx:id="fournisseurType" layoutX="959.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" />
-      <TableView layoutX="185.0" layoutY="396.0" prefHeight="176.0" prefWidth="304.0">
+      <TableView fx:id="medTable" layoutX="208.0" layoutY="399.0" prefHeight="176.0" prefWidth="338.0">
         <columns>
           <TableColumn fx:id="idMedDesousColumn" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="nomMedDessousColumn" prefWidth="108.0" text="Nom" />
-            <TableColumn fx:id="qttStockColumn" prefWidth="120.0" text=" Qté Stock" />
+          <TableColumn fx:id="nomMedDessousColumn" prefWidth="150.4000244140625" text="Nom" />
+            <TableColumn fx:id="qttStockColumn" prefWidth="112.0" text=" Qté Stock" />
         </columns>
       </TableView>
+      <Label layoutX="885.0" layoutY="246.0" prefHeight="30.0" prefWidth="67.0" text="fournisseur:" />
+      <ChoiceBox fx:id="fournisseurType" layoutX="959.0" layoutY="179.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="statusType" layoutX="957.0" layoutY="357.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="medicamentType" layoutX="957.0" layoutY="118.0" prefWidth="150.0" />
+      <Button fx:id="ajoutBtn1" layoutX="722.0" layoutY="546.0" mnemonicParsing="false" onAction="#updateApproOnAction" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: AFE4A7;" text="Mise a jour">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="ajoutBtn11" layoutX="587.0" layoutY="546.0" mnemonicParsing="false" onAction="#refreshpproOnAction" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: AFE4A7;" text="Actualiser">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="medicamentType1" layoutX="957.0" layoutY="46.0" prefWidth="150.0" visible="false" />
+      <TextField fx:id="id_med" layoutX="957.0" layoutY="14.0" prefHeight="26.0" prefWidth="150.0" visible="false" />
    </children>
 </AnchorPane>

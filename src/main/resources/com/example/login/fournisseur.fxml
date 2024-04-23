@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AnchorPane" prefHeight="599.0" prefWidth="953.0" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.FournisseurController">
+<AnchorPane fx:id="AnchorPane" prefHeight="599.0" prefWidth="1140.0" style="-fx-background-color: #D3FFFE;" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.FournisseurController">
    <children>
       <Label alignment="CENTER" layoutX="41.0" layoutY="14.0" text="Ajout fournisseur" textFill="#2262c6">
          <font>

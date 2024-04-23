@@ -84,6 +84,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button venteBtn;
+    @FXML
+    private Button recepCommandeBtn;
 
 
 
@@ -104,6 +106,7 @@ public class MainController implements Initializable {
         medicamentBtn.setVisible(false);
         venteBtn.setVisible(false);
         dashboardBtn.setVisible(false);
+        recepCommandeBtn.setVisible(false);
 
         // Set visibility based on user type
         switch (userType) {
@@ -116,17 +119,18 @@ public class MainController implements Initializable {
                 medicamentBtn.setVisible(true);
                 venteBtn.setVisible(true);
                 dashboardBtn.setVisible(true);
+                recepCommandeBtn.setVisible(true);
                 loadDashboard();
                 break;
             case "Vendeur":
                 venteBtn.setVisible(true);
-                dashboardBtn.setVisible(true);
-                loadDashboard();
+                loadVente();
+
                 break;
             case "Caissier":
                 caisseBtn.setVisible(true);
-                dashboardBtn.setVisible(true);
-                loadDashboard();
+                loadcaisse();
+
                 break;
             // Add more cases if needed for other user types
 
@@ -282,6 +286,23 @@ public class MainController implements Initializable {
     public void loadapprovisionnement(){
         try {
             Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/login/approvisionnement.fxml")));
+
+            ScrollPane mainSp = new ScrollPane();
+            mainSp.setContent(view);
+
+            borderPane.setCenter(mainSp);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    @FXML
+    void receptionOnAction(ActionEvent event) {
+        loadreception();
+    }
+    public void loadreception(){
+        try {
+            Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/login/recept_commande.fxml")));
 
             ScrollPane mainSp = new ScrollPane();
             mainSp.setContent(view);
