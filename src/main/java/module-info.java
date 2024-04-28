@@ -3,7 +3,7 @@ module com.example.login {
     requires javafx.fxml;
     requires java.sql;
     requires org.postgresql.jdbc;
-
+    requires org.apache.pdfbox;
 
 
     opens com.example.login to javafx.fxml;

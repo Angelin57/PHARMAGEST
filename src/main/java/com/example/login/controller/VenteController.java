@@ -213,14 +213,14 @@ public class VenteController {
 
 
     @FXML
-    void sendButtonOnAction(ActionEvent event) {
-
-
+    void sendButtonOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        VenteDAO.envoiCaisse();
+        refreshTableView();
 
     }
 
     @FXML
-    void withPrescriptionButtonOnAction(ActionEvent event) {
+    void withPrescriptionButtonOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
 
     }
 

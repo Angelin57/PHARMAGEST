@@ -87,36 +87,34 @@ public class ApprovisonnementDAO {
             throw e;
         }
     }
-    public static void updateApproAndMed(String status, int qttRecue, String medName ) throws SQLException, ClassNotFoundException {
+    public static void updateApproAndMed(String status, int qttRecue, String medName) throws SQLException, ClassNotFoundException {
         String sqlAppro = "UPDATE public.\"approvisionnement\" SET status = ?, quantite_recue = ? WHERE nom = ?";
         String sqlMed = "UPDATE public.\"medicament\" SET quantite_medicament = quantite_medicament + ? WHERE nom_medicament = ?";
-
         Connection conn = null;
         PreparedStatement statementAppro = null;
         PreparedStatement statementMed = null;
-
         try {
             conn = new connection().getConnection();
             conn.setAutoCommit(false); // Début de la transaction
-
-            // Mise à jour de la table "approvisionnement"
-            if (status.equalsIgnoreCase("Terminer")) {
+            // Vérifier si le statut est "Terminer" (ignorer la casse)
+            if ("Terminer".equalsIgnoreCase(status.trim())) {
+                // Mise à jour de la table "medicament" si le statut est "Terminer"
                 statementMed = conn.prepareStatement(sqlMed);
                 statementMed.setInt(1, qttRecue);
                 statementMed.setString(2, medName);
+
                 statementMed.executeUpdate();
-            } else {
-                statementAppro = conn.prepareStatement(sqlAppro);
-                statementAppro.setString(1, status);
-                statementAppro.setInt(2, qttRecue);
-                statementAppro.setString(3, medName);
-                statementAppro.executeUpdate();
             }
+            // Mise à jour du statut de l'approvisionnement dans tous les cas
+            statementAppro = conn.prepareStatement(sqlAppro);
+            statementAppro.setString(1, status);
+            statementAppro.setInt(2, qttRecue);
+            statementAppro.setString(3, medName);
+            statementAppro.executeUpdate();
 
             // Validation de la transaction
-            conn.commit(); // Validation de la transaction
+            conn.commit();
             System.out.println("Mise à jour réussie !");
-
         } catch (SQLException e) {
             if (conn != null) {
                 conn.rollback(); // Annulation de la transaction en cas d'erreur
@@ -136,8 +134,4 @@ public class ApprovisonnementDAO {
             }
         }
     }
-
-
-
-
 }

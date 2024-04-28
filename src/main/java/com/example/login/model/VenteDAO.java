@@ -12,7 +12,7 @@ import java.util.List;
 
 public class VenteDAO {
     public static Pair<List<Vente>, List<Medicament>> getAllVente() throws SQLException, ClassNotFoundException {
-        String selectVenteStmt = "SELECT * FROM public.\"vente\" ORDER BY id_vente ASC";
+        String selectVenteStmt = "SELECT * FROM public.\"vente\" WHERE status = 'non envoyé' ORDER BY id_vente ASC";
         String selectMedStmt = "SELECT * FROM public.\"medicament\" ORDER BY id_medicament ASC";
 
         try {
@@ -142,24 +142,21 @@ public class VenteDAO {
         }
     }
 
-    public static void envoiCaisse(String nom, int prixUnit, int quantite, Famille famille, Fournisseur fournisseur) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO public.\"medicament\" (nom_medicament, fournisseur_medicament, famille_medicament, prix_medicament, quantite_medicament) VALUES (?, ?, ?, ?, ?)";
+    public static void envoiCaisse() throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE public.\"vente\"\n" +
+                "SET status = 'envoyé', heure_creation = NOW()\n" +
+                "WHERE status = 'non envoyé';\n";
 
         try (Connection conn = new connection().getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
-            statement.setString(1, nom);
-            statement.setString(2, fournisseur.getNom()); // Utilise l'identifiant du fournisseur
-            statement.setString(3, famille.getNom()); // Utilise l'identifiant de la famille
-            statement.setInt(4, prixUnit);
-            statement.setInt(5, quantite);
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Un nouvel medicament a été inséré avec succès !");
+                System.out.println("Envoi effectué !");
             }
         } catch (SQLException e) {
-            System.out.println("Une erreur est survenue lors de l'insertion de medicament : " + e);
+            System.out.println("Une erreur est survenue lors de l'envoi : " + e);
             throw e;
         }
     }

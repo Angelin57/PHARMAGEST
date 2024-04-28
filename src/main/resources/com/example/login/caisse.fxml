@@ -10,13 +10,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="1140.0" style="-fx-background-color: #D3FFFE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.login.controller.CaisseController">
    <children>
-      <TableView layoutX="37.0" layoutY="105.0" prefHeight="274.0" prefWidth="474.0">
+      <TableView fx:id="tableFacture" layoutX="37.0" layoutY="105.0" prefHeight="274.0" prefWidth="540.0">
         <columns>
-          <TableColumn fx:id="idFactureColumn" prefWidth="80.80001527070999" text="ID" />
-            <TableColumn fx:id="dateFactureColumn" prefWidth="92.79995727539062" text="Date _creation" />
-            <TableColumn fx:id="heureFactureColumn" prefWidth="96.00007629394531" text="heure_creation" />
-            <TableColumn fx:id="prixFactureColumn" prefWidth="81.60003662109375" text="prix_total" />
-            <TableColumn fx:id="statutFactureColumn" prefWidth="117.5999755859375" text="Statut" />
+          <TableColumn fx:id="idFactureColumn" prefWidth="91.99999618530273" text="ID" />
+            <TableColumn fx:id="nbVente" prefWidth="111.19998779296873" text="Nombre de vente" />
+            <TableColumn fx:id="heureFactureColumn" prefWidth="127.199951171875" text="heure_creation" />
+            <TableColumn fx:id="prixFactureColumn" prefWidth="107.20004272460938" text="prix_total" />
+            <TableColumn fx:id="statutFactureColumn" prefWidth="102.39993286132812" text="Statut" />
         </columns>
       </TableView>
       <Label layoutX="308.0" layoutY="491.0" prefHeight="40.0" prefWidth="135.0" text="MONTANT A  PAYER:">
@@ -31,11 +31,11 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button fx:id="validerBtn" layoutX="445.0" layoutY="559.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="102.0" style="-fx-background-color: AFE4A7;" text="VALIDER" textFill="#181818">
+      <Button fx:id="validerBtn" layoutX="445.0" layoutY="559.0" mnemonicParsing="false" onAction="#validerBtnOnAction" prefHeight="32.0" prefWidth="102.0" style="-fx-background-color: AFE4A7;" text="VALIDER" textFill="#181818">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="annulerBtn" layoutX="587.0" layoutY="559.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="116.0" style="-fx-background-color: AFE4A7;" text="ANNULER" textFill="#151515">
+      <Button fx:id="annulerBtn" layoutX="587.0" layoutY="559.0" mnemonicParsing="false" onAction="#annulerBtnOnAction" prefHeight="32.0" prefWidth="116.0" style="-fx-background-color: AFE4A7;" text="EFFACER" textFill="#151515">
          <font>
             <Font size="15.0" />
          </font></Button>
@@ -47,12 +47,12 @@
       <TextField fx:id="montantRendreText" layoutX="475.0" layoutY="397.0" prefHeight="40.0" prefWidth="174.0" />
       <TextField fx:id="montantRecuText" layoutX="476.0" layoutY="451.0" prefHeight="40.0" prefWidth="174.0" />
       <TextField fx:id="montantPayerText" layoutX="476.0" layoutY="504.0" prefHeight="40.0" prefWidth="174.0" />
-      <TableView layoutX="581.0" layoutY="105.0" prefHeight="274.0" prefWidth="403.0">
+      <TableView fx:id="listMed" layoutX="649.0" layoutY="105.0" prefHeight="274.0" prefWidth="403.0">
         <columns>
           <TableColumn fx:id="idMedCaisseColumn" prefWidth="70.39996337890625" text="ID" />
           <TableColumn fx:id="nomMedCaisseColumn" prefWidth="139.20001220703125" text="Nom" />
             <TableColumn fx:id="qttMedCaisseColumn" prefWidth="58.4000244140625" text="Quantité" />
-            <TableColumn fx:id="prixMedCaisseColumn" prefWidth="132.7999755859375" text="Prix de vente unitaire" />
+            <TableColumn fx:id="prixMedCaisseColumn" prefWidth="132.7999755859375" text="Prix unitaire" />
         </columns>
       </TableView>
       <Label layoutX="699.0" layoutY="27.0" prefHeight="61.0" prefWidth="240.0" text="LISTE DES MEDICAMENTS" textFill="#2262c6">
@@ -65,5 +65,12 @@
             <Font size="33.0" />
          </font>
       </Label>
+      <Button fx:id="imprimerBtn" layoutX="769.0" layoutY="448.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="163.0" style="-fx-background-color: AFE4A7;" text="Imprimez facture" textFill="#181818">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="idMedTxt" layoutX="60.0" layoutY="417.0" prefHeight="32.0" prefWidth="110.0" />
+      <TextField fx:id="qttMedText" layoutX="60.0" layoutY="471.0" prefHeight="32.0" prefWidth="110.0" />
    </children>
 </AnchorPane>

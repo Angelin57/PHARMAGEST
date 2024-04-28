@@ -208,16 +208,13 @@ public class ApprovisionnementController {
     @FXML
     void updateApproOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         Medicament nameValue = medicamentType.getValue();
-        statusType.getValue();
-        qttlivreText.getText();
-        medicamentType1.getValue();
-        id_med.getText();
         int qttRecue = Integer.parseInt(qttlivreText.getText());
-        String status = String.valueOf(statusType.getValue());
+        String status = String.valueOf(statusType.getValue()); // Correction pour récupérer la valeur du statut
         String medName = String.valueOf(medicamentType1.getValue());
-        ApprovisonnementDAO.updateApproAndMed(status,qttRecue,medName);
+        ApprovisonnementDAO.updateApproAndMed(status, qttRecue, medName);
         refreshTableView();
     }
+
     @FXML
     void refreshpproOnAction(ActionEvent event) {
         try {
@@ -252,7 +249,7 @@ public class ApprovisionnementController {
 
 
 
-        private void refreshTableView() throws SQLException, ClassNotFoundException {
+    private void refreshTableView() throws SQLException, ClassNotFoundException {
         viewAllAppro(null);
     }
 
