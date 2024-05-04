@@ -65,12 +65,5 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="imprimerBtn" layoutX="769.0" layoutY="448.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="163.0" style="-fx-background-color: AFE4A7;" text="Imprimez facture" textFill="#181818">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <TextField fx:id="idMedTxt" layoutX="60.0" layoutY="417.0" prefHeight="32.0" prefWidth="110.0" />
-      <TextField fx:id="qttMedText" layoutX="60.0" layoutY="471.0" prefHeight="32.0" prefWidth="110.0" />
    </children>
 </AnchorPane>

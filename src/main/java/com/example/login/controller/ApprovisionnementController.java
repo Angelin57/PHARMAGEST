@@ -246,9 +246,6 @@ public class ApprovisionnementController {
         medTable.setItems(medObservableList); // Définir la liste de médicaments dans medTable
     }
 
-
-
-
     private void refreshTableView() throws SQLException, ClassNotFoundException {
         viewAllAppro(null);
     }

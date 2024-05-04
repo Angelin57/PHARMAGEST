@@ -1,5 +1,20 @@
 package com.example.login.controller;
-
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import javafx.print.PrinterJob;
 import com.example.login.model.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -8,13 +23,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.print.Printer;
-import javafx.print.PrinterJob;
+import javafx.print.*;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.transform.Scale;
 
@@ -25,13 +36,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 import javafx.util.Pair;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
+
+import javax.swing.text.Element;
 import java.io.File;
 
 import static com.example.login.model.CaisseDAO.updateMed;
@@ -39,7 +48,6 @@ import static com.example.login.model.CaisseDAO.updateMed;
 public class CaisseController {
     @FXML
     private Button annulerBtn;
-
 
     @FXML
     private TableColumn<Caisse, Timestamp> heureFactureColumn;
@@ -77,10 +85,6 @@ public class CaisseController {
 
     @FXML
     private TextField idMedTxt;
-    @FXML
-    private TextField qttMedText;
-    @FXML
-    private Button validerBtn;
 
     @FXML
     private TableView<Caisse> tableFacture;
@@ -159,14 +163,82 @@ public class CaisseController {
                 qttMeds.add(qttMed);
                 factureMeds.add(factureMed);
             }
-            CaisseDAO.updateMed(qttMeds,idMeds,factureMeds);
+
+            // Mettre à jour la base de données avec les médicaments vendus
+            CaisseDAO.updateMed(qttMeds, idMeds, factureMeds);
+
+            // Imprimer la facture
+            printFacture(montantPayer, montantRecu, montantRendre, listMed.getItems());
+
+            // Rafraîchir la vue
             refreshTableView();
-
-
         } catch (NumberFormatException e) {
             System.out.println("Veuillez entrer des montants valides.");
         }
     }
+
+    private void printFacture(Integer montantPayer, Integer montantRecu, Integer montantRendre, ObservableList<Caisse> medicamentsList) {
+        // Créer une instance de PrinterJob
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+
+        if (printerJob != null) {
+            // Créer le contenu de la facture
+            VBox contentPane = new VBox(); // Utiliser VBox pour organiser le contenu verticalement
+            contentPane.setAlignment(Pos.CENTER); // Centrer le contenu
+
+            // Ajouter l'image en haut de la facture
+            Image logoImage = new Image("file:///C:/BTS/Année 1-2/Année 2/Yusuf/Gestion pharmacie/Pharma-master v3/src/main/image/Logo-Pharmacie-1.jpg");
+            ImageView logoImageView = new ImageView(logoImage);
+            logoImageView.setFitWidth(100); // Réglez la largeur de l'image selon vos besoins
+            logoImageView.setPreserveRatio(true); // Conserver les proportions de l'image
+
+            // Ajouter le logo et le titre "Facture" à la VBox
+            contentPane.getChildren().add(logoImageView);
+            Text titleText = new Text("\nFacture\n");
+            titleText.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;"); // Modifier le style du titre
+            contentPane.getChildren().add(titleText);
+
+            // Afficher l'heure et la date de création de la facture
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Text dateTimeText = new Text("Date et heure de création : " + dateFormat.format(new Date()) + "\n\n");
+            contentPane.getChildren().add(dateTimeText);
+
+            // Ajouter le reste du contenu de la facture
+            StringBuilder content = new StringBuilder();
+            content.append("--------------------------------------------\n");
+            content.append("Médicaments achetés:\n");
+            for (Caisse medicament : medicamentsList) {
+                content.append("- ").append(medicament.getNomMed()).append(" (Quantité: ").append(medicament.getQtt()).append(", Prix unitaire: ").append(medicament.getPrix_unit()).append(" Rs").append(")\n");
+            }
+            content.append("--------------------------------------------\n");
+            content.append("Montant reçu: ").append(montantRecu).append(" Rs").append("\n");
+            content.append("Montant à payer: ").append(montantPayer).append(" Rs").append("\n");
+            content.append("--------------------------------------------\n");
+            content.append("Montant à rendre: ").append(montantRendre).append(" Rs").append("\n\n");
+            content.append("--------------------------------------------\n");
+
+
+            Text text = new Text(content.toString());
+            contentPane.getChildren().add(text);
+
+            // Imprimer le contenu
+            boolean printed = printerJob.printPage(contentPane);
+            if (printed) {
+                printerJob.endJob();
+            } else {
+                System.out.println("Erreur lors de l'impression de la facture.");
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     @FXML
     void viewAllFacture(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -190,55 +262,7 @@ public class CaisseController {
     }
 
 
-    //    @FXML
-//    void imprimerBtnOnAction(ActionEvent event) {
-//        // Collecte des informations de la facture
-//        String heureCreation = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//        Integer montantTotal = Integer.valueOf(montantPayerText.getText());
-//        Integer montantRecu = Integer.valueOf(montantRecuText.getText());
-//        Integer montantRendre = Integer.valueOf(montantRendreText.getText());
-//        ObservableList<Caisse> medicaments = listMed.getItems();
-//
-//        // Création d'un nouveau document PDF
-//        try (PDDocument document = new PDDocument()) {
-//            PDPage page = new PDPage();
-//            document.addPage(page);
-//
-//            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-//                contentStream.setFont(PDType1Font.COURIER_BOLD, 12);
-//                contentStream.beginText();
-//                contentStream.newLineAtOffset(100, 700);
-//                contentStream.showText("Facture");
-//                contentStream.newLineAtOffset(0, -20);
-//                contentStream.showText("Date et heure de création de la facture : " + heureCreation);
-//                contentStream.newLineAtOffset(0, -20);
-//                contentStream.showText("Montant total : " + montantTotal);
-//                contentStream.newLineAtOffset(0, -20);
-//                contentStream.showText("Montant reçu : " + montantRecu);
-//                contentStream.newLineAtOffset(0, -20);
-//                contentStream.showText("Montant à rendre : " + montantRendre);
-//                contentStream.newLineAtOffset(0, -20);
-//
-//                // Insérer les détails des médicaments
-//                contentStream.newLineAtOffset(0, -20);
-//                contentStream.setFont(PDType1Font.HELVETICA, 10);
-//                contentStream.showText("Détails des médicaments :");
-//                contentStream.newLineAtOffset(0, -20);
-//                for (Caisse medicament : medicaments) {
-//                    contentStream.showText("Médicament : " + medicament.getNomMed() + ", Quantité : " + medicament.getQtt() + ", Prix unitaire : " + medicament.getPrix_unit());
-//                    contentStream.newLineAtOffset(0, -15);
-//                }
-//
-//                contentStream.endText();
-//            }
-//
-//            // Enregistrement du fichier PDF
-//            File file = new File("facture.pdf");
-//            document.save(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     @FXML
     void annulerBtnOnAction(ActionEvent event) {
         montantRendreText.clear();
@@ -246,6 +270,4 @@ public class CaisseController {
         montantRecuText.clear();
 
     }
-
-
 }
