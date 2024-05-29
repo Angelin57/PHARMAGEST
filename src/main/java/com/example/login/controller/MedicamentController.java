@@ -129,7 +129,6 @@ public class MedicamentController {
             showErrorMessage("Classe non trouvée : " + e.getMessage());
             resultArea.setText("Classe non trouvée : " + e.getMessage());
         }
-
     }
 
     @FXML

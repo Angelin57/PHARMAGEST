@@ -31,6 +31,11 @@
             </ImageView>
             <Label fx:id="objet1" alignment="CENTER" layoutX="27.0" layoutY="79.0" textFill="#2262c6">
                <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="18.0" layoutY="39.0" text="VENTE JOURNALIER" textFill="#545352">
+               <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
@@ -46,7 +51,12 @@
                   <Image url="@../images/icons8_microsoft_word_48px.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="27.0" layoutY="79.0" text="Objet 2" textFill="#2262c6">
+            <Label fx:id="objet2" alignment="CENTER" layoutX="27.0" layoutY="79.0" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="31.0" layoutY="36.0" text="VENTE HEBDOMADAIRE" textFill="#545352">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -63,24 +73,39 @@
                   <Image url="@../images/icons8_microsoft_excel_48px.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="27.0" layoutY="79.0" text="Objet 3" textFill="#2262c6">
+            <Label fx:id="objet3" alignment="CENTER" layoutX="27.0" layoutY="79.0" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="28.0" layoutY="39.0" text="VENTE MENSUEL" textFill="#545352">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="751.0" layoutY="206.0" prefHeight="120.0" prefWidth="191.0" style="-fx-border-radius: 0px 50px 0px 0px; -fx-border-color: #F1F2F7;">
+      <AnchorPane fx:id="medSeuil" layoutX="751.0" layoutY="206.0" prefHeight="120.0" prefWidth="191.0" style="-fx-border-radius: 0px 50px 0px 0px; -fx-border-color: #F1F2F7;">
          <effect>
             <DropShadow color="#9a9696" />
          </effect>
          <children>
-            <ImageView fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons8_microsoft_excel_48px.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="27.0" layoutY="79.0" text="Objet 4" textFill="#2262c6">
+            <Label fx:id="objet4" alignment="CENTER" layoutX="27.0" layoutY="79.0" textFill="#2262c6">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="5.0" layoutY="28.0" prefHeight="22.0" prefWidth="202.0" text="MEDICAMENT EN DESSOUS" textFill="#545352">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="53.0" text="DU SEUIL" textFill="#545352">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>

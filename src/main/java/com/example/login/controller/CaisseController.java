@@ -36,14 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apache.pdfbox.pdmodel.PDDocument;
 
-import javafx.util.Pair;
-
-import javax.swing.text.Element;
-import java.io.File;
-
-import static com.example.login.model.CaisseDAO.updateMed;
 
 public class CaisseController {
     @FXML
