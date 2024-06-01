@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class VenteController {
@@ -88,6 +90,7 @@ public class VenteController {
     private Medicament medicament;
 
 
+
     public void initialize() throws SQLException, ClassNotFoundException{
         withPrescriptionButton.setOnAction(event -> {
             // Rendre la visibilité de la pane ordonnance à true lorsque le bouton withPrescriptionButton est cliqué
@@ -102,9 +105,9 @@ public class VenteController {
         codeColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdVente()).asObject());
         nomMedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomMed()));
         prixColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPrixMed()).asObject());
-        qttColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQttAcheteMed()).asObject());
+        qttColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQttAchete()).asObject());
         prixTotalColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPrixTotal()).asObject());
-        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
+        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatut()));
 
 
         //Tableau de recherche
@@ -173,8 +176,8 @@ public class VenteController {
                 txtQuantiteMedicament.clear();
                 txtPriceMedicament.clear();
                 txtFamillyMedicament.clear();
-                txtNameClient.clear();
-                txtNameDoctor.clear();
+
+
 
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -214,10 +217,47 @@ public class VenteController {
 
     @FXML
     void sendButtonOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        VenteDAO.envoiCaisse();
-        refreshTableView();
 
-    }
+            // Récupérer toutes les ventes actuellement affichées dans le TableView tableauAchatMedicament
+            ObservableList<Vente> ventes = tableauAchatMedicament.getItems();
+
+            // Filtrer les ventes avec statut "non envoyé"
+            ObservableList<Vente> ventesNonEnvoyees = ventes.filtered(vente -> "non envoyé".equals(vente.getStatut()));
+
+            if (ventesNonEnvoyees.isEmpty()) {
+                System.out.println("Aucune vente à associer à une facture.");
+                return;
+            }
+
+            // Créer une nouvelle instance de Facture
+            Facture nouvellefacture = new Facture();
+            nouvellefacture.setDateCreation(LocalDate.now());
+            nouvellefacture.setHeureCreation(LocalTime.now());
+            nouvellefacture.setStatut("non payée");
+            nouvellefacture.setOrdonnance(Boolean.getBoolean(String.valueOf(ordonnance)));
+
+            // Ajouter les ventes non envoyées à la facture
+            nouvellefacture.setVentes(ventesNonEnvoyees);
+
+            try {
+                // Insérer la facture dans la base de données sans insérer les ventes
+                VenteDAO.insertFactureEtVentes(nouvellefacture);
+
+                // Associer les ventes à la facture et mettre à jour le statut
+                for (Vente vente : ventesNonEnvoyees) {
+                    vente.setIdFacture(nouvellefacture.getIdFacture()); // Associer la facture à la vente
+                    vente.setStatut("envoyé"); // Changer le statut
+                    VenteDAO.updateVente(vente); // Mettre à jour la vente dans la base de données
+                }
+                refreshTableView();
+                txtNameDoctor.clear();
+                txtNameClient.clear();
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     @FXML
     void withPrescriptionButtonOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {

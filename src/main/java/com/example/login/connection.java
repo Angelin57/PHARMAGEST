@@ -9,9 +9,9 @@ public class connection {
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection databasing = null;
-        String databaseName = "pharmagest";
+        String databaseName = "PHARMAGEST";
         String databaseUser = "postgres";
-        String databasePassword = "5751";
+        String databasePassword = "jaimelechocolat";
         String url = "jdbc:postgresql://localhost:5432/" + databaseName;
 
         try {

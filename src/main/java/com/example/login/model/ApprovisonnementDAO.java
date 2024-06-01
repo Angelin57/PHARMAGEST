@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ApprovisonnementDAO {
     public static Pair<List<Approvisionnement>, List<Medicament>> getAllApprovisionnemet() throws SQLException, ClassNotFoundException {
-        String selectApproStmt = "SELECT * FROM public.\"approvisionnement\" ORDER BY id_approvisionnemet ASC";
+        String selectApproStmt = "SELECT * FROM public.\"approvisionnement\" ORDER BY id_approvisionnement ASC";
         String selectMedStmt = "SELECT * FROM public.\"medicament\" WHERE quantite_medicament <= 30 ORDER BY id_medicament ASC";
 
         try {
@@ -34,7 +34,7 @@ public class ApprovisonnementDAO {
         while (rsAppro.next()) {
             // Données d'approvisionnement
             Approvisionnement approvisionnement = new Approvisionnement();
-            approvisionnement.setIdApprovisonnement(rsAppro.getInt("id_approvisionnemet"));
+            approvisionnement.setIdApprovisonnement(rsAppro.getInt("id_approvisionnement"));
             approvisionnement.setNom(rsAppro.getString("nom"));
             approvisionnement.setDateRecue(rsAppro.getDate("date_recue"));
             approvisionnement.setPrixFournisseur(rsAppro.getInt("prix_fournisseur"));

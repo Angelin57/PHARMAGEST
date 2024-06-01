@@ -34,7 +34,7 @@ public class ListeCommandeDAO {
             ListeCommande listeCommande = new ListeCommande();
 
             // Récupération des données de la table ListeCommande
-            listeCommande.setIdAppro(rs.getInt("id_approvisionnemet"));
+            listeCommande.setIdAppro(rs.getInt("id_approvisionnement"));
             listeCommande.setNomMed(rs.getString("nom"));
             listeCommande.setDateRecue(rs.getDate("date_recue"));
             listeCommande.setPrixFournisseur(rs.getInt("prix_fournisseur"));

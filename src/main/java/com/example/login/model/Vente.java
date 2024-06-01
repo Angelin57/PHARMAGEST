@@ -2,24 +2,26 @@ package com.example.login.model;
 
 public class Vente {
     private Integer idVente;
-    private String nomMed;
-    private Integer prixMed;
-    private Integer qttAcheteMed;
+    private String nomMedicament;
+    private Integer prixMedicament;
+    private Integer qttAchete;
     private Integer prixTotal;
     private String nomClient;
     private String nomMedecin;
-    private String status;
+    private String statut;
+    private Integer idMedicament;
+    private Integer idFacture;
 
-    public Vente(String status) {
-        this.status = status;
+    public Vente(String statut) {
+        this.statut = statut;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatut() {
+        return statut;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
     public Vente(String nomClient, String nomMedecin) {
@@ -53,32 +55,32 @@ public class Vente {
         return idVente;
     }
 
-    public void setIdVente(Integer idMed) {
-        this.idVente = idMed;
+    public void setIdVente(Integer idMedicament) {
+        this.idVente = idMedicament;
     }
 
     public String getNomMed() {
-        return nomMed;
+        return nomMedicament;
     }
 
-    public void setNomMed(String nomMed) {
-        this.nomMed = nomMed;
+    public void setNomMedicament(String nomMedicament) {
+        this.nomMedicament = nomMedicament;
     }
 
     public Integer getPrixMed() {
-        return prixMed;
+        return prixMedicament;
     }
 
-    public void setPrixMed(Integer prixMed) {
-        this.prixMed = prixMed;
+    public void setPrixMedicament(Integer prixMedicament) {
+        this.prixMedicament = prixMedicament;
     }
 
-    public Integer getQttAcheteMed() {
-        return qttAcheteMed;
+    public Integer getQttAchete () {
+        return qttAchete;
     }
 
-    public void setQttAcheteMed(Integer qttAcheteMed) {
-        this.qttAcheteMed = qttAcheteMed;
+    public void setQttAchete(Integer qttAchete) {
+        this.qttAchete = qttAchete;
     }
 
     public Integer getPrixTotal() {
@@ -89,11 +91,24 @@ public class Vente {
         this.prixTotal = prixTotal;
     }
 
-    public Vente(Integer idVente, String nomMed, Integer prixMed, Integer qttAcheteMed, Integer prixTotal) {
+    public Integer getIdMedicament() { return idMedicament; }
+
+    public void setIdMedicament(Integer idMedicament) { this.idMedicament = idMedicament; }
+
+    public int getIdFacture() { return idFacture; }
+
+    public void setIdFacture(int idFacture) { this.idFacture = idFacture;    }
+
+
+
+
+
+    public Vente(Integer idVente, String nomMedicament, Integer prixMedicament, Integer qttAchete, Integer prixTotal) {
         this.idVente = idVente;
-        this.nomMed = nomMed;
-        this.prixMed = prixMed;
-        this.qttAcheteMed = qttAcheteMed;
+        this.nomMedicament = nomMedicament;
+        this.prixMedicament = prixMedicament;
+        this.qttAchete = qttAchete;
         this.prixTotal = prixTotal;
     }
+
 }

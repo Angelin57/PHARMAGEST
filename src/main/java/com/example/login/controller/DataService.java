@@ -74,9 +74,9 @@ public class DataService {
     // Méthode pour établir la connexion à la base de données
     private Connection getConnection() throws SQLException {
         // Remplacez les paramètres par vos informations de connexion à la base de données
-        String url = "jdbc:postgresql://localhost:5432/pharmagest";
+        String url = "jdbc:postgresql://localhost:5432/PHARMAGEST";
         String user = "postgres";
-        String password = "5751";
+        String password = "jaimelechocolat";
         return DriverManager.getConnection(url, user, password);
     }
 }

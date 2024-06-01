@@ -2,123 +2,137 @@ package com.example.login.model;
 
 import com.example.login.connection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map;
-import java.util.HashMap;
+
 public class CaisseDAO {
-    public static List<Caisse> getAllFacture() throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT \n" +
-                "    heure_creation,\n" +
-                "    facture,\n" +
-                "    COUNT(*) AS nombre_ventes,\n" +
-                "    SUM(prix_total) AS prix_total\n" +
-                "FROM \n" +
-                "    vente\n" +
-                "WHERE \n" +
-                "    status = 'envoyé'\n" +
-                "AND facture = 'non payé'\n"+
-                "GROUP BY \n" +
-                "    heure_creation,\n" +
-                "    facture;\n";
 
-        try {
-            Connection conn = new connection().getConnection();
-            ResultSet rs = conn.createStatement().executeQuery(selectStmt);
-            List<Caisse> resultList = new ArrayList<>();
+    public static List<Facture> getAllFacturesNonPayees() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM facture WHERE statut = 'non payée' ORDER BY date DESC";
+        List<Facture> listeFactures = new ArrayList<>();
+
+        try (Connection conn = new connection().getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                Timestamp heureCreation = rs.getTimestamp("heure_creation");
-                int nombreVentes = rs.getInt("nombre_ventes");
-                int prixTotal = rs.getInt("prix_total");
-                String Facture = rs.getString("facture");
+                Facture facture = new Facture();
+                facture.setIdFacture(rs.getInt("id_facture"));
+                facture.setDateCreation(rs.getDate("date").toLocalDate());
+                facture.setHeureCreation(rs.getTime("heure").toLocalTime());
+                facture.setMontantTotal(rs.getInt("montant_total"));
+                facture.setStatut(rs.getString("statut"));
+                facture.setOrdonnance(rs.getBoolean("ordonnance"));
 
-                Caisse resultatVente = new Caisse();
-                resultatVente.setHeureCreation(heureCreation);
-                resultatVente.setNombreVentes(nombreVentes);
-                resultatVente.setPrixTotal(prixTotal);
-                resultatVente.setFacture(Facture);
-
-                resultList.add(resultatVente);
+                listeFactures.add(facture);
             }
 
-            conn.close();
-            return resultList;
         } catch (SQLException e) {
-            System.out.println("L'opération de sélection SQL a échoué : " + e);
+            System.out.println("Une erreur est survenue lors de la récupération des factures non payées : " + e);
             throw e;
         }
+
+        return listeFactures;
     }
 
-    public static List<Caisse> getMedicamentsForFacture(Caisse heure_creation) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT id_medicament, nom_medicament, quatite_achetee, prix_unit FROM vente WHERE heure_creation = ?";
-        try {
-            Connection conn = new connection().getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(selectStmt);
-            preparedStatement.setTimestamp(1, heure_creation.getHeureCreation());
-            ResultSet rs = preparedStatement.executeQuery();
-            List<Caisse> medicamentsList = new ArrayList<>();
+    public static List<Vente> getVentesFacture(int idFacture) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT v.* FROM vente v JOIN facture_vente fv ON v.id_vente = fv.vente_id WHERE fv.facture_id = ?";
+        List<Vente> listeVentes = new ArrayList<>();
+
+        try (Connection conn = new connection().getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, idFacture); // Définir la valeur du paramètre pour idFacture
+            ResultSet rs = statement.executeQuery();
+
             while (rs.next()) {
-                // Ajoutez des détails supplémentaires si nécessaire pour créer un objet de type Caisse pour chaque médicament
-                // Par exemple:
-                Caisse caisse = new Caisse();
-                caisse.setIdMed(rs.getInt("id_medicament"));
-                caisse.setNomMed(rs.getString("nom_medicament"));
-                caisse.setQtt(rs.getInt("quatite_achetee"));
-                caisse.setPrix_unit(rs.getInt("prix_unit"));
-                medicamentsList.add(caisse);
+                Vente vente = new Vente();
+                vente.setIdVente(rs.getInt("id_vente"));
+                vente.setNomMedicament(rs.getString("nom_medicament"));
+                vente.setPrixMedicament(rs.getInt("prix_unit"));
+                vente.setQttAchete(rs.getInt("quantite_achetee"));
+                vente.setPrixTotal(rs.getInt("prix_total"));
+                vente.setStatut(rs.getString("statut"));
+                vente.setIdMedicament(rs.getInt("id_medicament"));
+                listeVentes.add(vente);
             }
-            conn.close();
-            return medicamentsList;
+
         } catch (SQLException e) {
-            System.out.println("L'opération de sélection SQL a échoué : " + e);
+            System.out.println("Une erreur est survenue lors de la récupération des ventes par facture : " + e);
             throw e;
         }
+
+        return listeVentes;
     }
 
-    public static void updateMed(List<Integer> qttMeds, List<Integer> idMeds, List<String> factureMeds) throws SQLException, ClassNotFoundException {
+    public static  void updateMed(List<Integer> qttMeds, List<Integer> idMeds)  throws SQLException, ClassNotFoundException {
         String updateQuantiteStmt = "UPDATE medicament SET quantite_medicament = quantite_medicament - ? WHERE id_medicament = ?";
-        String updateFactureStmt = "UPDATE vente SET facture = 'payé' WHERE id_medicament = ?";
 
         Connection conn = null;
         PreparedStatement quantitePreparedStatement = null;
-        PreparedStatement facturePreparedStatement = null;
+
 
         try {
-            conn = new connection().getConnection(); // Assurez-vous que votre classe de connexion est correctement implémentée
-
-            // Préparation des deux requêtes
+            conn = new connection().getConnection();
             quantitePreparedStatement = conn.prepareStatement(updateQuantiteStmt);
-            facturePreparedStatement = conn.prepareStatement(updateFactureStmt);
 
-            // Boucle à travers les listes de quantités et d'IDs pour mettre à jour chaque médicament
+
             for (int i = 0; i < qttMeds.size(); i++) {
-                // Mise à jour de la quantité
+                int idMed = idMeds.get(i); // Récupérer l'ID du médicament
+
+                // Mettre à jour la quantité du médicament
                 quantitePreparedStatement.setInt(1, qttMeds.get(i));
-                quantitePreparedStatement.setInt(2, idMeds.get(i));
+                quantitePreparedStatement.setInt(2, idMed);
                 quantitePreparedStatement.executeUpdate();
 
-                // Mise à jour de la facture
-                facturePreparedStatement.setInt(1, idMeds.get(i));
-                facturePreparedStatement.executeUpdate();
-            }
 
+            }
         } catch (SQLException e) {
             System.out.println("L'opération de mise à jour SQL a échoué : " + e);
             throw e;
         } finally {
             if (quantitePreparedStatement != null) {
                 quantitePreparedStatement.close();
-            }
-            if (facturePreparedStatement != null) {
-                facturePreparedStatement.close();
+
+
             }
             if (conn != null) {
                 conn.close();
             }
         }
     }
+
+    public static void updateStatutFacture(int idFacture) throws SQLException, ClassNotFoundException {
+        String updateStatutFactureStmt = "UPDATE facture SET statut = 'payée' WHERE id_facture = ?";
+
+        Connection conn = null;
+        PreparedStatement statutFacturePreparedStatement = null;
+
+        try {
+            conn = new connection().getConnection();
+            statutFacturePreparedStatement = conn.prepareStatement(updateStatutFactureStmt);
+
+            // Mettre à jour le statut de la facture
+            statutFacturePreparedStatement.setInt(1, idFacture);
+            statutFacturePreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("L'opération de mise à jour du statut de la facture a échoué : " + e);
+            throw e;
+        } finally {
+            if (statutFacturePreparedStatement != null) {
+                statutFacturePreparedStatement.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+
 }
+
+

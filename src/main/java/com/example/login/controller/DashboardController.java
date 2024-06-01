@@ -41,9 +41,9 @@ public class DashboardController {
 
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
-        objet1.setText(DashboardDAO.getVenteJournalier().get(0).getPrixTotal().toString()+" Rs");
-        objet2.setText(DashboardDAO.getVenteHebdomadaire().get(0).getPrixTotal().toString()+" Rs");
-        objet3.setText(DashboardDAO.getVenteMensuel().get(0).getPrixTotal().toString()+" Rs");
+        objet1.setText(DashboardDAO.getVenteJournalier().get(0).getMontantTotal() +" Rs");
+        objet2.setText(DashboardDAO.getVenteHebdomadaire().get(0).getMontantTotal() +" Rs");
+        objet3.setText(DashboardDAO.getVenteMensuel().get(0).getMontantTotal() +" Rs");
         objet4.setText(DashboardDAO.getMed().get(0).getQuantite_medicament().toString());
     }
 
